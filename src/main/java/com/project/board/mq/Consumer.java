@@ -15,15 +15,12 @@ import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
-
+@Slf4j
 @Named
 @ApplicationScoped
 public class Consumer implements Serializable, MessageListener {
 
     private static final String QUEUE_NAME = "advertising.queue";
-
-    Logger log = LoggerFactory.getLogger(Consumer.class);
-
 //    @Inject
 //    private WebSocketPush webSocketPush;
 
@@ -33,7 +30,6 @@ public class Consumer implements Serializable, MessageListener {
     public void consume() throws IOException, TimeoutException {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         connectionFactory.setHost("localhost");
-//        connectionFactory.setPort(5672);
         connection = connectionFactory.newConnection();
         channel = connection.createChannel();
         channel.queueDeclare(QUEUE_NAME, true, false, false, null);
@@ -43,7 +39,7 @@ public class Consumer implements Serializable, MessageListener {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
                 String message = new String(body, StandardCharsets.UTF_8);
-                log.info("Received " + message);
+                log.info("!!!!!!!!!!!!!!! Received " + message);
                 System.out.println(message);
 //                websocketPush.sendMessage(message);
             }

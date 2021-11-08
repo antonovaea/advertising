@@ -6,6 +6,29 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
-    <h:outputLabel value="Hello, world"/>
+    <div align="center">
+        <h:outputText value="Top Categories" styleClass="contentsTitle"/>
+        <h:dataTable value="#{topCategoryView.topCategories}" var="topCategory"
+                     styleClass="table"
+                     headerClass="table-header"
+                     footerClass="table-footer"
+                     rowClasses="table-odd-row, table-even-row">
+            <h:column>
+                <f:facet name="header">Category Name</f:facet>
+                #{topCategory.topCategoryName}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Amount of sold products</f:facet>
+                #{topCategory.amountOfSoldProducts}
+            </h:column>
+        </h:dataTable>
+
+
+
+
+
+
+
+    </div>
 </f:view>
 </html>
