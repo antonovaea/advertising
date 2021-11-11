@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <script type="application/javascript">
+        let webSocket = new WebSocket("ws://localhost:8180/advertstand-1.0-SNAPSHOT/websocket")
+        webSocket.onmessage = function (event) {
+            window.location.reload()
+            let obj = JSON.parse(event.data);
+            console.log(obj)
+        }
+    </script>
+</h:head>
+<h:body>
+    <div align="center">
+        <div class="container">
+            <div class="card">
+                <div class="card-header py-3">
+                    <p class="text-primary m-0 fw-bold" align="center">Advertising Stand</p>
+                </div>
+                <div class="card-body">
+                    <div class="patients_input form-group">
+                        <div class="table-responsive table mt-2">
+                            <table id="top">
+                                <tr class="table my-3" align="center">
+                                    <th >Category Name</th>
+                                    <th>Amount of sold products</th>
+                                </tr>
+                                <h:panelGroup>
+                                    <ui:repeat var="topCategory" value="#{topCategoryView.topCategories}">
+                                        <tr align="center">
+                                            <td><h:outputText value="#{topCategory.topCategoryName}"/></td>
+                                            <td><h:outputText value="#{topCategory.amountOfSoldProducts}"/></td>
+                                        </tr>
+                                    </ui:repeat>
+                                </h:panelGroup>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</h:body>
+</html>
+
